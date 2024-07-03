@@ -7,7 +7,7 @@ import { Pregunta } from '../model/pregunta';
   providedIn: 'root'
 })
 export class PreguntasService {
-  private apiUrl = 'http://127.0.0.1:5000/respuestas/v1/preguntas';
+  private apiUrl = 'https://backend-sisvita-final-grupo11.onrender.com/respuestas/v1/preguntas';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +21,6 @@ export class PreguntasService {
       id_test: id_test,
       respuestas: respuestas
     };
-    return this.http.post<any>('http://127.0.0.1:5000/respuestas/v1/agregar', data);
+    return this.http.post<any>('https://backend-sisvita-final-grupo11.onrender.com/respuestas/v1/agregar', data);
   }
 }

@@ -39,10 +39,8 @@
 
     <div class="main-content">
       <div *ngIf="selectedOption === 'bienvenida'">
-        <div class="header">
-          <h1>Bienvenido</h1>
-        </div>
         <div class="welcome-content">
+          <h1>Bienvenido</h1>
           <p>¡Bienvenido a nuestra página web de ayuda para la ansiedad! Estamos aquí para ofrecerte el apoyo y los recursos que necesitas para manejar la ansiedad y recuperar el control de tu vida. Entendemos lo desafiante que puede ser enfrentarse a la ansiedad, pero queremos que sepas que no estás solo. Nuestra comunidad está aquí para brindarte orientación, consejos prácticos y un espacio seguro para compartir tus experiencias.</p>
           <img src="assets/logoMenuEstudiante.png" alt="Logo Menu Estudiante">
         </div>
@@ -51,7 +49,6 @@
       <div *ngIf="selectedOption === 'realizar-test'" class="realizar-test">
         <div class="test-header">
           <h2>Tipo de test</h2>
-          <div class="d1"><h2>Descripción</h2></div>
         </div>
         <div class="test-content">
           <table class="test-table">
@@ -85,28 +82,24 @@
       </div>
 
       <div *ngIf="selectedOption === 'realizar-test-amasc'" class="test-amas-c">
-        <div class="contenido-test">
-          <div class="test-cabeza">
-            <h2 text-align="center">Test AMAS-C</h2>
-          </div>
+        <div class="test-header">
+          <h2>Test AMAS-C</h2>
+        </div>
+        <div class="test-content">
           <div class="datos-test">
-              <label for="nombres">Nombres:</label>
-              <input type="text" id="nombres" [value]="nombres" readonly>
-              <label for="apellidos">Apellidos:</label>
-              <input type="text" id="apellidos" [value]="apellidoPaterno + ' ' + apellidoMaterno" readonly>
-          </div>
-            <div class="datos-test">
-              <label for="test">Test:</label>
-              <input type="text" id="test" value="Test AMAS-C" readonly>
-              <span>Cantidad de preguntas: {{ preguntas.length }}</span>
-            
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" [value]="nombres" readonly>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" [value]="apellidoPaterno + ' ' + apellidoMaterno" readonly>
+            <label for="cantidadPreguntas">Cantidad de preguntas:</label>
+            <input type="text" id="cantidadPreguntas" [value]="preguntas.length" readonly>
           </div>
           <form #testForm="ngForm" (ngSubmit)="enviarRespuestas($event)">
-            <table class="cuadro-test">
+            <table class="test-table">
               <thead>
                 <tr>
                   <th>Preguntas</th>
-                  <th class="th-respuestas">Respuestas</th>
+                  <th>Respuestas</th>
                 </tr>
               </thead>
               <tbody>
@@ -114,12 +107,10 @@
                   <td class="preguntas">{{ i + 1 }}. {{ pregunta.texto }}</td>
                   <td class="respuestas">
                     <label>
-                      <input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'Sí')" value="Sí">
-                      Sí
+                      <input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'Sí')" value="Sí"> Sí
                     </label>
                     <label>
-                      <input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'No')" value="No">
-                      No
+                      <input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'No')" value="No"> No
                     </label>
                   </td>
                 </tr>
@@ -127,27 +118,23 @@
             </table>
             <button type="submit" class="submit-button">Enviar</button>
           </form>
-          
           <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
           <div *ngIf="mensajeError" class="error-message">{{ mensajeError }}</div>
         </div>
       </div>
 
-      <div *ngIf="selectedOption === 'realizar-test-beck'" class="test2">
-        <div class="contenido-test">
-          <div class="test-cabeza">
-            <h2>Test-Beck</h2>
-          </div>
-          <div class="datos-test2">
+      <div *ngIf="selectedOption === 'realizar-test-beck'" class="test-amas-c">
+        <div class="test-header">
+          <h2>Test Beck</h2>
+        </div>
+        <div class="test-content">
+          <div class="datos-test">
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" [value]="nombres" readonly>
             <label for="apellidos">Apellidos:</label>
             <input type="text" id="apellidos" [value]="apellidoPaterno + ' ' + apellidoMaterno" readonly>
-          </div>
-          <div class="datos-test">
-            <label for="test">Test:</label>
-            <input type="text" id="test" value="Test-Beck" readonly>
-            <span>Cantidad de preguntas: {{ preguntas.length }}</span>
+            <label for="cantidadPreguntas">Cantidad de preguntas:</label>
+            <input type="text" id="cantidadPreguntas" [value]="preguntas.length" readonly>
           </div>
           <form #testForm="ngForm" (ngSubmit)="enviarRespuestas($event)">
             <table class="test-table">
@@ -165,7 +152,6 @@
                 <tr *ngFor="let pregunta of preguntas; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ pregunta.texto }}</td>
-
                   <td><input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'Nunca')" value="Nunca"></td>
                   <td><input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'Raramente')" value="Raramente"></td>
                   <td><input type="radio" [name]="'pregunta_' + i" (change)="registrarRespuesta(pregunta.id_pregunta, 'Algunas veces')" value="Algunas veces"></td>
@@ -179,23 +165,19 @@
           <div *ngIf="mensajeError" class="error-message">{{ mensajeError }}</div>
         </div>
       </div>
-      
 
-      <div *ngIf="selectedOption === 'realizar-test-zung'" class="test2">
-        <div class="contenido-test">
-          <div class="test-cabeza">
-            <h2>Test-Zung</h2>
-          </div>
-          <div class="datos-test2">
+      <div *ngIf="selectedOption === 'realizar-test-zung'" class="test-amas-c">
+        <div class="test-header">
+          <h2>Test Zung</h2>
+        </div>
+        <div class="test-content">
+          <div class="datos-test">
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" [value]="nombres" readonly>
             <label for="apellidos">Apellidos:</label>
             <input type="text" id="apellidos" [value]="apellidoPaterno + ' ' + apellidoMaterno" readonly>
-          </div>
-          <div class="datos-test">
-            <label for="test">Test:</label>
-            <input type="text" id="test" value="Test-Zung" readonly>
-            <span>Cantidad de preguntas: {{ preguntas.length }}</span>
+            <label for="cantidadPreguntas">Cantidad de preguntas:</label>
+            <input type="text" id="cantidadPreguntas" [value]="preguntas.length" readonly>
           </div>
           <form #testForm="ngForm" (ngSubmit)="enviarRespuestas($event)">
             <table class="test-table">
@@ -226,8 +208,6 @@
           <div *ngIf="mensajeError" class="error-message">{{ mensajeError }}</div>
         </div>
       </div>
-      
-
     </div>
   </div>
 </div>

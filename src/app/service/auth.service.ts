@@ -8,7 +8,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly BASE_URL: string = 'http://localhost:5000';
+  private readonly BASE_URL: string = 'https://backend-sisvita-final-grupo11.onrender.com';
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
 
@@ -30,8 +30,17 @@ export class AuthService {
           this.localStorageService.setItem('authToken', 'true');
           this.localStorageService.setItem('userData', JSON.stringify(response.data));
           this.localStorageService.setItem('personaData', JSON.stringify(response.personaData));
-          this.localStorageService.setItem('id_especialista', response.data.id_persona); // Guardar id_persona como id_especialista
+          this.localStorageService.setItem('id_especialista', response.data.id_persona);
         }
+        return response;
+      })
+    );
+  }
+
+  registrarPersonaYUsuario(formData: any): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/registrar-persona-usuario`, formData).pipe(
+      map((response: any) => {
+        console.log('Respuesta del servidor:', response);  // Log para verificar respuesta del servidor
         return response;
       })
     );

@@ -6,7 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { LoginEspecialistaComponent } from './login-especialista/login-especialista.component';
 import { MenuEstudianteComponent } from './menu-estudiante/menu-estudiante.component';
 import { MenuEspecialistaComponent } from './menu-especialista/menu-especialista.component';
-
+import { RegistrarPacienteComponent } from './registrar-paciente/registrar-paciente.component';
+import { RegistrarEspecialistaComponent } from './registrar-especialista/registrar-especialista.component';
 
 export const routes: Routes = [
   { path: '', component: PortalComponent },
@@ -16,5 +17,7 @@ export const routes: Routes = [
   { path: 'menu-estudiante', component: MenuEstudianteComponent },
   { path: 'login-especialista', component: LoginEspecialistaComponent },
   { path: 'menu-especialista', component: MenuEspecialistaComponent },
+  {path: 'registrar-paciente', component: RegistrarPacienteComponent },
+  {path: 'registrar-especialista',component: RegistrarEspecialistaComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
